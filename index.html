@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Advisory, Business School e Consulting para empresas que querem crescer através de clientes. Da estratégia à execução.">
+  <title>INTÉZA Customer Growth</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =================================================================
+       1. TOKENS DE DESIGN
+    ================================================================= */
+    :root {
+      --paper:   #F2F1EE;
+      --paper-2: #E8E6E2;
+      --ink:     #0D0D0D;
+      --ink-2:   #6B6B66;
+      --vinho:   #4A1626;
+      --vinho-2: #651F34;
+      --champ:   #D6C7A4;
+      --line:    #CFCCC4;
+      --fg: var(--ink);
+      --bg: var(--paper);
+      --display: "Newsreader", Georgia, "Times New Roman", serif;
+      --body:    "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+      color-scheme: light;
+    }
+
+    /* =================================================================
+       2. RESET & BASE
+    ================================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 68px; /* altura da nav */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img  { max-width: 100%; display: block; }
+    p    { margin: 0; }
+    a    { color: inherit; }
+    ul   { margin: 0; padding: 0; }
+
+    /* =================================================================
+       3. TIPOGRAFIA
+    ================================================================= */
+    h1, h2, h3, h4, .serif {
+      font-family: var(--display);
+      font-weight: 400;
+      line-height: 1.08;
+      text-wrap: balance;
+      margin: 0;
+    }
+
+    h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); }
+    h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
+
+    .lead {
+      font-family: var(--display);
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      line-height: 1.45;
+      max-width: 34em;
+    }
+
+    .muted { color: var(--ink-2); }
+
+    /* =================================================================
+       4. LAYOUT
+    ================================================================= */
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding-inline: clamp(16px, 5vw, 48px);
+    }
+
+    section  { padding-block: clamp(56px, 8vw, 112px); }
+    header   { padding-block: clamp(72px, 10vw, 140px); }
+    footer   { padding-block: clamp(28px, 4vw, 48px); }
+
+    .grid  { display: grid; gap: clamp(24px, 4vw, 56px); }
+    .g2    { grid-template-columns: 1fr 1fr; }
+    .g3    { grid-template-columns: repeat(3, 1fr); }
+    .g4    { grid-template-columns: repeat(4, 1fr); }
+
+    @media (max-width: 860px) {
+      .g2, .g3, .g4 { grid-template-columns: 1fr; }
+    }
+
+    .grid > * { min-width: 0; }
+
+    /* =================================================================
+       5. MOTIVO LINHA + PONTO
+    ================================================================= */
+    .eyebrow {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--champ);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .eyebrow::before {
+      content: "";
+      flex-shrink: 0;
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+    }
+    .eyebrow::after {
+      content: "";
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .on-paper .eyebrow { color: var(--vinho); }
+    .dark     .eyebrow { color: var(--champ); }
+    .wine     .eyebrow { color: var(--champ); }
+
+    /* =================================================================
+       6. BANDAS DE COR
+    ================================================================= */
+    .on-paper { background: var(--paper); color: var(--ink); }
+    .dark     { background: var(--ink);   color: var(--paper); }
+    .wine     { background: var(--vinho); color: var(--paper); }
+
+    .dark  .muted { color: rgba(244,239,230,.58); }
+    .wine  .muted { color: #CFC4B4; }
+
+    .rule { border-top: 1px solid var(--line); }
+    .wine .rule,
+    .dark .rule { border-color: rgba(214,199,164,.3); }
+
+    /* =================================================================
+       7. BOTÕES
+    ================================================================= */
+    .btn {
+      display: inline-block;
+      padding: 14px 26px;
+      font-family: var(--body);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 1px solid currentColor;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      cursor: pointer;
+      transition: background .18s, color .18s, border-color .18s;
+    }
+    .btn.primary {
+      background: var(--vinho);
+      color: var(--paper);
+      border-color: var(--vinho);
+    }
+    .btn.primary:hover { background: var(--vinho-2); border-color: var(--vinho-2); }
+
+    .btn.champ {
+      background: var(--champ);
+      color: var(--vinho);
+      border-color: var(--champ);
+    }
+    .btn.champ:hover { background: #C9BEA8; border-color: #C9BEA8; }
+
+    .btn.outline-light {
+      background: transparent;
+      color: var(--paper);
+      border-color: rgba(242,241,238,.45);
+    }
+    .btn.outline-light:hover { background: rgba(242,241,238,.1); }
+
+    .btn:focus-visible { outline: 2px solid var(--champ); outline-offset: 3px; }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    /* =================================================================
+       8. PLACEHOLDER DE FOTO (hachura diagonal)
+    ================================================================= */
+    .photo {
+      position: relative;
+      overflow: hidden;
+      border: 1px dashed rgba(201,190,168,.7);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      min-height: 260px;
+    }
+
+    .photo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        135deg,
+        var(--paper-2) 0 10px,
+        transparent 10px 20px
+      );
+    }
+
+    .photo span {
+      position: relative;
+      z-index: 1;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      background: var(--paper);
+      padding: 5px 10px;
+      border-radius: 1px;
+      line-height: 1.4;
+    }
+
+    .wine .photo,
+    .dark .photo {
+      border-color: rgba(214,199,164,.35);
+    }
+    .wine .photo::before,
+    .dark .photo::before {
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(244,239,230,.06) 0 10px,
+        transparent 10px 20px
+      );
+    }
+    .wine .photo span,
+    .dark .photo span {
+      background: transparent;
+      color: var(--champ);
+    }
+
+    /* =================================================================
+       9. NAVEGAÇÃO
+    ================================================================= */
+    #nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      transition: box-shadow .2s;
+    }
+    #nav.scrolled { box-shadow: 0 2px 20px rgba(20,16,16,.08); }
+
+    #nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-block: 15px;
+    }
+
+    /* Logo */
+    .logo {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.28em;
+      text-decoration: none;
+      color: var(--ink);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .logo small {
+      display: block;
+      font-size: 0.5rem;
+      letter-spacing: 0.3em;
+      color: var(--ink-2);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+    .logo em { font-style: normal; position: relative; }
+    .logo em::after {
+      content: "";
+      position: absolute;
+      left: 38%;
+      top: -7px;
+      width: 7px;
+      height: 2px;
+      background: var(--vinho);
+      transform: rotate(-28deg);
+    }
+
+    /* Links desktop */
+    #nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+    #nav-links a {
+      text-decoration: none;
+      color: var(--ink-2);
+      transition: color .15s;
+    }
+    #nav-links a:hover { color: var(--ink); }
+
+    /* Hambúrguer (mobile) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      margin-right: -8px;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform .2s, opacity .2s;
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Drawer mobile */
+    #mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 56px 0 0;
+      background: var(--paper);
+      z-index: 99;
+      padding: 28px clamp(16px, 5vw, 48px) 40px;
+      overflow-y: auto;
+      border-top: 1px solid var(--line);
+    }
+    #mobile-nav.open { display: block; }
+
+    #mobile-nav ul { list-style: none; }
+    #mobile-nav li { border-bottom: 1px solid var(--line); }
+    #mobile-nav a {
+      display: block;
+      padding: 16px 0;
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    #mobile-nav .mobile-cta { margin-top: 28px; }
+
+    @media (max-width: 860px) {
+      #nav-links        { display: none; }
+      #nav .btn.primary { display: none; }
+      .hamburger        { display: flex; }
+    }
+
+    /* =================================================================
+       10. HERO
+    ================================================================= */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero .wrap { align-items: center; width: 100%; }
+    .hero h1    { max-width: 12em; }
+    .hero .lead { margin-top: 28px; }
+
+    /* =================================================================
+       11. LOGOS / REFERÊNCIAS
+    ================================================================= */
+    .logos-section {
+      padding-block: 36px;
+    }
+    .logos-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 28px;
+      align-items: center;
+    }
+    .logos-row li {
+      list-style: none;
+      font-family: var(--display);
+      font-size: 1.2rem;
+      color: var(--ink-2);
+    }
+    .logos-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--vinho);
+      flex-basis: 100%;
+      margin-top: 20px;
+    }
+    .logos-row:first-child .logos-label { margin-top: 0; }
+
+    /* =================================================================
+       12. VERTICAIS / ECOSSISTEMA
+    ================================================================= */
+    .vert {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+    }
+    .vert > div {
+      padding: 36px 28px 36px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .vert > div + div {
+      border-left: 1px solid var(--line);
+      padding-left: 28px;
+    }
+    @media (max-width: 860px) {
+      .vert { grid-template-columns: 1fr; }
+      .vert > div + div { border-left: 0; padding-left: 0; }
+    }
+    .vert h3          { margin-bottom: 12px; }
+    .vert-key {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--vinho);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .vert ul {
+      padding-left: 1.1em;
+      margin: 14px 0 0;
+      color: var(--ink-2);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+    .vert a.more {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 0.84rem;
+      color: var(--vinho);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: opacity .15s;
+    }
+    .vert a.more:hover { opacity: 0.72; }
+
+    /* =================================================================
+       13. LISTA EDITORIAL (timeline)
+    ================================================================= */
+    .list { display: grid; }
+
+    .list > div {
+      display: grid;
+      grid-template-columns: 148px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+    }
+    .list > div:last-child  { border-bottom: 1px solid var(--line); }
+    .wine .list > div,
+    .dark .list > div       { border-color: rgba(214,199,164,.3); }
+    .wine .list > div:last-child,
+    .dark .list > div:last-child { border-bottom-color: rgba(214,199,164,.3); }
+
+    .list .t {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      line-height: 1.2;
+      padding-top: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .list > div { grid-template-columns: 1fr; gap: 6px; }
+    }
+
+    /* =================================================================
+       14. NÚMEROS
+    ================================================================= */
+    .nums {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    @media (max-width: 600px) { .nums { grid-template-columns: 1fr; } }
+
+    .nums b {
+      display: block;
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 6px;
+    }
+    .nums span { font-size: 0.88rem; line-height: 1.4; }
+
+    /* =================================================================
+       15. PALESTRAS
+    ================================================================= */
+    .talk {
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+    }
+    .talk:last-of-type { border-bottom: 1px solid var(--line); }
+    .talk .q {
+      font-family: var(--display);
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      line-height: 1.2;
+      max-width: 22em;
+    }
+    .talk .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 22px;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--vinho);
+      margin: 12px 0 10px;
+    }
+    .talk p { max-width: 62ch; }
+
+    /* =================================================================
+       16. FAQ — accordion com animação
+    ================================================================= */
+    .faq-item { border-top: 1px solid var(--line); }
+    .faq-item:last-child { border-bottom: 1px solid var(--line); }
+
+    .faq-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 0;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      color: var(--fg);
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 20px;
+      line-height: 1.3;
+    }
+    .faq-icon {
+      flex-shrink: 0;
+      font-size: 1.35rem;
+      color: var(--vinho);
+      line-height: 1;
+      transition: transform .22s;
+      margin-top: 2px;
+    }
+    .faq-btn[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+
+    .faq-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .32s ease, padding-bottom .32s ease;
+    }
+    .faq-body.open { max-height: 600px; }
+
+    .faq-body p {
+      padding-bottom: 22px;
+      max-width: 65ch;
+      color: var(--ink-2);
+      font-size: 0.97rem;
+      line-height: 1.65;
+    }
+
+    /* =================================================================
+       17. FORMULÁRIO (seção diagnóstico)
+    ================================================================= */
+    .form-grid { display: grid; gap: 16px; max-width: 560px; }
+
+    .field { display: grid; gap: 7px; }
+
+    .field label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      font-family: var(--body);
+      font-size: 0.95rem;
+      padding: 13px 16px;
+      background: rgba(13,13,13,.04);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      border-radius: 2px;
+      width: 100%;
+      transition: border-color .18s, background .18s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D6C7A4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 42px;
+    }
+    .field select option { background: var(--paper); color: var(--ink); }
+
+    .field input:focus-visible,
+    .field select:focus-visible,
+    .field textarea:focus-visible {
+      outline: 2px solid var(--vinho);
+      outline-offset: 2px;
+      border-color: var(--vinho);
+    }
+    .field input.error,
+    .field select.error,
+    .field textarea.error  { border-color: #c0392b; }
+
+    .field-error {
+      display: none;
+      font-size: 0.7rem;
+      color: #e57373;
+      letter-spacing: 0.04em;
+    }
+    .field.has-error .field-error { display: block; }
+
+    .field textarea { resize: vertical; min-height: 96px; }
+
+    .form-success {
+      display: none;
+      font-family: var(--display);
+      font-size: 1.25rem;
+      color: var(--champ);
+      margin-top: 12px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(214,199,164,.3);
+    }
+
+    /* =================================================================
+       18. CONTATO
+    ================================================================= */
+    .contact-grid {
+      display: grid;
+      gap: 4px;
+      font-size: 0.97rem;
+      margin-top: 32px;
+    }
+    .contact-grid b {
+      font-weight: 600;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--champ);
+      margin-top: 14px;
+    }
+    .contact-grid b:first-child { margin-top: 0; }
+
+    /* =================================================================
+       19. RODAPÉ
+    ================================================================= */
+    footer {
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+    footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 40px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer .muted { font-size: 0.8rem; }
+
+    /* =================================================================
+       20. UTILITÁRIOS
+    ================================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAVEGAÇÃO — sticky, hambúrguer mobile, links para âncoras
+================================================================ -->
+<nav id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">INT<em>É</em>ZA<small>CUSTOMER GROWTH</small></a>
+
+    <ul id="nav-links">
+      <li><a href="#consulting">Consulting</a></li>
+      <li><a href="#advisory">Advisory</a></li>
+      <li><a href="#trilha">A trilha</a></li>
+      <li><a href="#school">Business School</a></li>
+      <li><a href="#palestras">Palestras</a></li>
+      <li><a href="#pesquisas">Pesquisas</a></li>
+      <li><a href="#socias">Time</a></li>
+    </ul>
+
+    <a class="btn primary" href="#diagnostico">Agendar diagnóstico</a>
+
+    <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Abrir menu" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Drawer mobile -->
+<div id="mobile-nav" aria-hidden="true" aria-label="Menu mobile">
+  <ul>
+    <li><a href="#consulting">Consulting</a></li>
+    <li><a href="#advisory">Advisory</a></li>
+    <li><a href="#trilha">A trilha</a></li>
+    <li><a href="#school">Business School</a></li>
+    <li><a href="#palestras">Palestras</a></li>
+    <li><a href="#pesquisas">Pesquisas</a></li>
+    <li><a href="#socias">Time</a></li>
+  </ul>
+  <div class="mobile-cta">
+    <a class="btn primary" href="#diagnostico">Agendar diagnóstico</a>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     HERO
+================================================================ -->
+<header id="top" class="hero on-paper">
+  <div class="wrap grid g2" style="align-items:center">
+    <div>
+      <p class="eyebrow">Advisory · Business School · Consulting</p>
+      <h1>Para empresas que querem crescer através de clientes. Da estratégia à execução.</h1>
+      <p class="lead" style="margin-top:28px">As mentes por trás das maiores marcas e cases de customer growth, strategy &amp; experience do Brasil, dedicadas ao seu negócio e dentro da sua operação.</p>
+      <div class="btns">
+        <a class="btn primary" href="#diagnostico">Agendar diagnóstico de 20 min</a>
+      </div>
+    </div>
+    <div>
+      <div class="photo" style="min-height:420px"><span>Foto · Juliana Loch e Mariana Caetano, lado a lado, fundo neutro, sem moldura</span></div>
+    </div>
+  </div>
+</header>
+
+
+<!-- ================================================================
+     REFERÊNCIAS
+================================================================ -->
+<section class="on-paper logos-section" style="padding-block:36px">
+  <div class="wrap">
+    <ul class="logos-row">
+      <li class="logos-label">Referências INTÉZA</li>
+      <li>Sírio-Libanês</li>
+      <li>Amazon</li>
+      <li>Dasa</li>
+      <li>Volvo</li>
+      <li>Unimed</li>
+      <li>Wellhub</li>
+      <li>Hapvida</li>
+      <li>Karl Storz</li>
+      <li class="logos-label">Formação e docência</li>
+      <li>Harvard</li>
+      <li>Stanford</li>
+      <li>IEXP Espanha</li>
+      <li>FGV</li>
+      <li>Faculdade Sírio-Libanês</li>
+      <li>G4 Educação</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     POR QUE A INTÉZA EXISTE
+================================================================ -->
+<section class="wine">
+  <div class="wrap grid g2">
+    <div>
+      <p class="eyebrow">Por que a INTÉZA existe</p>
+      <h2>A pesquisa mostra o que o cliente diz. Mas o negócio vive do que o cliente faz.</h2>
+    </div>
+    <div class="lead" style="color:#F4EFE6">
+      <p>NPS, satisfação e pesquisa contam o que o cliente sentiu. Recompra, retenção, indicação e margem contam o que ele fez. A distância entre as duas coisas é onde a empresa perde dinheiro sem perceber.</p>
+      <p style="margin-top:22px">A INTÉZA entra no negócio para fechar essa distância: um diagnóstico profundo, a linguagem do negócio e o caminho da estratégia às dores da operação, mudando toda a cadeia de valor. Partimos da estratégia que você já tem, revisamos e assumimos postura de dono.</p>
+      <p style="margin-top:22px;font-size:1rem;font-family:var(--body);color:#CFC4B4">Quando o que o cliente faz vira modelo e o modelo dá lucro, o valor deixa de ser pergunta. Isto é Intéza.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     MERCADOS
+================================================================ -->
+<section class="on-paper" id="segmentos">
+  <div class="wrap">
+    <p class="eyebrow">Mercados em que atuamos</p>
+    <h2 style="max-width:16em;margin-bottom:40px">Padrão de alto mercado, levado a cada segmento sem diluição.</h2>
+    <div class="grid g4">
+      <div>
+        <h3>Health &amp; Wellness</h3>
+        <p class="muted" style="margin-top:10px">Experiência de cuidado que gera valor percebido, vínculo e receita em hospitais, operadoras, redes de clínicas, farmacêutica e bem-estar.</p>
+      </div>
+      <div>
+        <h3>SaaS &amp; Tech</h3>
+        <p class="muted" style="margin-top:10px">Redução de churn, aumento de engajamento e expansão da base de receita recorrente.</p>
+      </div>
+      <div>
+        <h3>Bens de Consumo</h3>
+        <p class="muted" style="margin-top:10px">Estruturação de canais, alianças estratégicas e defesa de market share.</p>
+      </div>
+      <div>
+        <h3>Varejo de Luxo</h3>
+        <p class="muted" style="margin-top:10px">Recompra por conexões emocionais profundas e padronização de exclusividade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     ECOSSISTEMA — 3 VERTICAIS
+================================================================ -->
+<section class="on-paper" id="verticais">
+  <div class="wrap">
+    <p class="eyebrow">O ecossistema</p>
+    <h2 style="max-width:16em;margin-bottom:40px">Três portas de entrada. O mesmo padrão.</h2>
+    <div class="vert">
+
+      <div>
+        <span class="vert-key">01 · Consulting</span>
+        <h3>Boutique de execução</h3>
+        <p class="muted">O cliente como destino. Conhecimento de bastidor de quem já liderou as maiores operações do país, aplicado ao seu negócio: diagnóstico profundo, linguagem do negócio e execução da estratégia às dores da operação, com dono nomeado, padrão escrito e indicador vivo.</p>
+        <ul>
+          <li>Cockpit INTÉZA · ciclo de 12 meses · degrau 3 da trilha</li>
+          <li>Método E=MC² · experiência do paciente</li>
+        </ul>
+        <a class="more" href="#consulting">Ver o Cockpit e o E=MC² →</a>
+      </div>
+
+      <div>
+        <span class="vert-key">02 · Advisory</span>
+        <h3>Board mentorship</h3>
+        <p class="muted">Governança de cliente no nível do board. Diagnóstico profundo e direção ao lado de quem decide, sem assumir a rotina.</p>
+        <ul>
+          <li>Bússola INTÉZA · uma dor, 3 a 6 meses · degrau 2 da trilha</li>
+          <li>Conselho e mentoria executiva de sócios e C-level</li>
+        </ul>
+        <a class="more" href="#advisory">Ver o Advisory →</a>
+      </div>
+
+      <div>
+        <span class="vert-key">03 · Business School</span>
+        <h3>INTÉZA Academy</h3>
+        <p class="muted">Educação executiva com metodologia testada nos ambientes mais exigentes. Programas in company e palestras.</p>
+        <ul>
+          <li>Rota INTÉZA · masterclasses, mentoria e comunidade · degrau 1 da trilha</li>
+          <li>Transformando a Experiência do Cliente · in company</li>
+          <li>Do Clínico ao Empresário · trilha de 180 dias</li>
+          <li>Cockpit de Execução · formação de empresários</li>
+          <li>Palestras e keynotes</li>
+        </ul>
+        <a class="more" href="#school">Ver programas e palestras →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     A TRILHA INTÉZA
+================================================================ -->
+<section class="wine" id="trilha">
+  <div class="wrap">
+    <p class="eyebrow">A trilha INTÉZA · em qual degrau você está?</p>
+    <h2 style="max-width:16em">A trilha não é uma porta. É o caminho que o cliente percorre entre elas.</h2>
+    <p class="lead" style="margin-top:22px;color:#F4EFE6">Três degraus, um único fio condutor: o Blueprint INTÉZA, com as cinco lentes do 5P aplicadas em tudo, da primeira aula ao último mês do ciclo. Muda a profundidade, não o método. Cada degrau financia e qualifica o próximo, e cada um tem o cliente certo.</p>
+
+    <div class="list" style="margin-top:40px">
+      <div>
+        <span class="t">Rota<br><small style="font-family:var(--body);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champ)">Business School</small></span>
+        <p><b style="font-weight:500">Para quem ainda não executou nada com método.</b> O fundador em expansão, com receita e clientes crescendo e atendimento ainda artesanal, e o gestor que quer estrutura antes do caos. Masterclasses, mentoria em grupo e comunidade: aqui o cliente conhece o método, prova no próprio negócio e dá o primeiro passo de execução.</p>
+      </div>
+      <div>
+        <span class="t">Bússola<br><small style="font-family:var(--body);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champ)">Advisory</small></span>
+        <p><b style="font-weight:500">Para quem tem uma dor única, urgente e pontual.</b> Churn alto, onboarding travado, SLA estourado, cobrança de sócios ou investidores por resultado rápido. Três a seis meses de diagnóstico profundo e direção executiva das sócias, com antes e depois mensurável. É a prova do método antes de um ciclo anual.</p>
+      </div>
+      <div>
+        <span class="t">Cockpit<br><small style="font-family:var(--body);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champ)">Consulting</small></span>
+        <p><b style="font-weight:500">Para a empresa com complexidade real e múltiplas frentes.</b> Sponsor executivo comprometido, uma pessoa interna dedicada e orçamento para implementar, não só para diagnosticar. Doze meses da estratégia às dores da operação, mudando toda a cadeia de valor, até a empresa decidir com dados sem a INTÉZA na sala.</p>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top:26px;font-size:.95rem">Preferimos dizer não na primeira conversa a entregar um ciclo que não vai gerar valor. O diagnóstico de 20 minutos existe para encontrar o seu degrau.</p>
+    <div class="btns"><a class="btn champ" href="#diagnostico">Descobrir o meu degrau</a></div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     CONSULTING
+================================================================ -->
+<section class="on-paper" id="consulting">
+  <div class="wrap">
+    <p class="eyebrow">Consulting</p>
+    <h2 style="max-width:16em">Diagnóstico profundo. Linguagem do negócio. Da estratégia às dores da operação.</h2>
+    <p class="lead" style="margin-top:20px">Não colocamos uma equipe dentro da sua operação. Entendemos o negócio em profundidade, traduzimos a estratégia na linguagem de quem opera e mudamos a cadeia de valor inteira, com dono, padrão e indicador em cada elo.</p>
+
+    <div class="grid g2" style="margin-top:48px;align-items:start">
+
+      <!-- Cockpit -->
+      <div>
+        <h3>Cockpit INTÉZA</h3>
+        <p class="muted" style="margin-top:12px">Para empresas que cresceram e ainda dependem do fundador para funcionar. Terceiro degrau da trilha INTÉZA. Ciclo de 12 meses: o diagnóstico profundo revela onde a empresa perde dinheiro, a INTÉZA conduz o plano com a sua liderança, da estratégia às dores da operação, e ao final a cadeia de valor fica de pé sem a gente.</p>
+        <div class="list" style="margin-top:24px">
+          <div><span class="t">Mês 1</span><p>Mapeamento obrigatório pelas cinco lentes do 5P (Propósito, Passos, Papel, Padrão, Performance) e plano de 90 dias.</p></div>
+          <div><span class="t">Meses 2 a 12</span><p>Cockpit em operação: rituais semanais com a liderança, reunião estratégica mensal, cockpit de indicadores atualizado e a cadeia de valor redesenhada elo a elo.</p></div>
+          <div><span class="t">Transferência</span><p>Processo documentado, time interno treinado. A empresa decide com dados e escolhe renovar ou operar sozinha.</p></div>
+        </div>
+        <p style="margin-top:18px;font-size:.9rem" class="muted">Três pacotes conforme a dor: um processo crítico, a jornada inteira do cliente ou múltiplas verticais. Garantia INTÉZA: se a execução não seguir o mapeamento inicial, o valor é devolvido.</p>
+        <div class="btns"><a class="btn primary" href="#diagnostico">Quero saber se o Cockpit é para a minha empresa</a></div>
+      </div>
+
+      <!-- E=MC² -->
+      <div>
+        <h3>Método E=MC² · Experiência do Paciente</h3>
+        <p class="muted" style="margin-top:12px">Metodologia autoral INTÉZA para hospitais, operadoras, redes de clínicas, diagnóstico e indústria da saúde. Experiência de valor é o resultado de método aplicado ao cliente, em escala.</p>
+        <div class="list" style="margin-top:24px">
+          <div><span class="t">E</span><p>Experiência de valor: excelência percebida pelo paciente e pela família, reputação e vínculo para o negócio.</p></div>
+          <div><span class="t">M</span><p>Método: Lean Healthcare, protocolos e práticas seguras, dono nomeado, padrão escrito e indicador vivo.</p></div>
+          <div><span class="t">C²</span><p>Cliente escalado: Design Thinking, PREMs e satisfação, soluções replicáveis levadas a toda a operação.</p></div>
+        </div>
+        <p style="margin-top:18px;font-size:.9rem" class="muted">Seis frentes compostas conforme a necessidade: Estratégia, Entendimento do Paciente, Design, Pessoas &amp; Cultura, Métricas e Governança. Resultados em NPS, HCAHPS, retenção, tempo de resolução e custo por jornada.</p>
+        <div class="btns"><a class="btn" href="#diagnostico">Conversar sobre experiência do paciente</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     ADVISORY
+================================================================ -->
+<section class="wine" id="advisory">
+  <div class="wrap grid g2" style="align-items:center">
+
+    <div>
+      <p class="eyebrow">Advisory</p>
+      <h2>Governança de cliente no nível do board.</h2>
+      <p class="lead" style="margin-top:24px;color:#F4EFE6">A junção das duas frentes: a visão de quem construiu operações em Amazon, Volvo, Sírio-Libanês e Dasa, aplicada ao lado de quem decide. Diagnóstico profundo e direção, sem assumir a rotina.</p>
+      <div class="list" style="margin-top:30px">
+        <div><span class="t">Bússola</span><p>Segundo degrau da trilha. Projeto de 3 a 6 meses para uma dor única, urgente e pontual: churn alto, onboarding travado, SLA estourado. Diagnóstico profundo, mapeamento 5P do processo crítico, direção executiva das sócias e transferência, com antes e depois mensurável. Quem sai da Bússola com resultado entra no Cockpit qualificado.</p></div>
+        <div><span class="t">Conselho</span><p>Assento consultivo com leitura de cliente, operação e crescimento nas decisões de sócios e investidores.</p></div>
+        <div><span class="t">Mentoria</span><p>Acompanhamento individual de CEO, fundadores e C-level responsáveis por retenção, recompra e margem.</p></div>
+        <div><span class="t">Cockpit de leitura</span><p>Os indicadores que mostram o que move o ponteiro e o que é apenas ruído, revisados com Juliana e Mariana a cada ciclo.</p></div>
+      </div>
+      <div class="btns"><a class="btn champ" href="#diagnostico">Agendar conversa com o time</a></div>
+    </div>
+
+    <div>
+      <div class="photo" style="min-height:380px"><span>Foto · time em reunião de mesa, close nas mãos e papel, P&amp;B</span></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     BUSINESS SCHOOL
+================================================================ -->
+<section class="on-paper" id="school">
+  <div class="wrap">
+    <p class="eyebrow">Business School · INTÉZA Academy</p>
+    <h2 style="max-width:16em">Só ensina quem conhece o bastidor e a metodologia diretamente de Harvard.</h2>
+    <p class="lead" style="margin-top:20px">A Rota é o primeiro degrau da trilha INTÉZA: masterclasses, mentoria em grupo e comunidade de negócios, onde o cliente conhece o método e dá o primeiro passo de execução. Os programas abaixo são in company.</p>
+
+    <div class="grid g2" style="margin-top:48px;align-items:start">
+
+      <!-- Coluna esquerda: foto + números -->
+      <div>
+        <div class="photo" style="min-height:300px"><span>Foto · turma 2025 Customer Strategy for C-Levels, São Paulo</span></div>
+        <div class="nums" style="margin-top:34px">
+          <div><b>50</b><span class="muted">lideranças na turma presencial de 2025</span></div>
+          <div><b>+R$ 40 bi</b><span class="muted">de faturamento acumulado das empresas participantes</span></div>
+          <div><b>+70 mi</b><span class="muted">de consumidores na carteira</span></div>
+        </div>
+      </div>
+
+      <!-- Coluna direita: programas -->
+      <div>
+
+        <!-- Transformando a Experiência do Cliente -->
+        <h3>Transformando a Experiência do Cliente · in company</h3>
+        <p style="font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--vinho);margin:10px 0 14px">Metodologia Harvard · Cinco encontros · Para a liderança da sua empresa</p>
+        <p class="muted">O método de caso da Harvard Business School, aplicado aos negócios da experiência, dentro da sua empresa. Cinco encontros, um case por dia, um pilar por encontro, com discussão mediada por Juliana Loch e Mariana Caetano. Baseado no Transforming Customer Experiences, da HBS Executive Education. Somente in company, para empresas de todos os setores. Turma fechada, cases do seu mercado e síntese estratégica aplicada à sua operação. Online ao vivo ou presencial. Certificado INTÉZA Academy para cada participante.</p>
+        <div class="list" style="margin-top:22px">
+          <div><span class="t">Encontro 1</span><p>Como um negócio de serviço cresce escolhendo o que não fazer. Modelos de excelência em serviços, escolhas estratégicas no design do serviço e mapa do cenário competitivo.</p></div>
+          <div><span class="t">Encontro 2</span><p>Como a jornada do cliente vira ativo de crescimento. Leitura da jornada ponta a ponta, momentos que criam ou destroem valor e onde a receita nasce.</p></div>
+          <div><span class="t">Encontro 3</span><p>Como se executa com escala e velocidade sem perder o cliente de vista. Operação, processo e tecnologia a serviço da experiência.</p></div>
+          <div><span class="t">Encontro 4</span><p>Como a centralidade no cliente sobrevive à pressão do crescimento. Cultura, incentivos e governança de cliente.</p></div>
+          <div><span class="t">Encontro 5</span><p>Como a transformação acontece no mercado real. Os cinco pilares reunidos, recap dos negócios estudados e síntese estratégica para a sua empresa.</p></div>
+        </div>
+        <div class="btns"><a class="btn primary" href="#diagnostico">Contrate a INTÉZA in company</a></div>
+
+        <div class="rule" style="margin:40px 0 28px"></div>
+
+        <!-- Do Clínico ao Empresário -->
+        <h3>Do Clínico ao Empresário</h3>
+        <p style="font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--vinho);margin:10px 0 14px">Trilha de 180 dias · Para profissionais de saúde donos de negócio</p>
+        <p class="muted">Do clínico que aprendeu a linguagem do negócio ao empresário que nunca se esquece de onde veio. Foram anos aprendendo sobre saúde; ao abrir o próprio consultório, clínica ou serviço, o profissional descobre que também precisa de gestão, marca, processo e estratégia de cliente. O resultado conhecido: agenda cheia, caixa apertado e dependência total do dono.</p>
+        <p class="muted" style="margin-top:14px">Um módulo por mês. Cada um abre com um encontro presencial de 4h (método, framework e plano da frente do mês) e segue com três sessões online de execução acompanhada, em que cada participante aplica no próprio negócio. Ao fim do mês, a frente está de pé: dono nomeado, padrão escrito e indicador vivo.</p>
+        <div class="list" style="margin-top:22px">
+          <div><span class="t">Mês 1</span><p>Estratégia. Modelo de negócio, oferta e público definidos. O participante sai com a proposta de valor escrita e o segmento que vai priorizar.</p></div>
+          <div><span class="t">Mês 2</span><p>Financeiro. Precificação, custos e fluxo de caixa montados. Margem previsível, sem sufoco no fim do mês.</p></div>
+          <div><span class="t">Mês 3</span><p>Marca. Identidade, promessa e presença construídas. Reconhecimento e escolha, não só indicação de boca.</p></div>
+          <div><span class="t">Mês 4</span><p>Processos. Jornada e operação-chave padronizadas pelo 5P. A operação roda sem o dono na sala.</p></div>
+          <div><span class="t">Mês 5</span><p>Marketing &amp; Growth. Canais de aquisição e a primeira campanha rodando. Agenda cheia por método, não por sorte.</p></div>
+          <div><span class="t">Mês 6</span><p>Experiência do paciente como motor. Retenção, recompra e indicação ativadas, com as métricas que provam o resultado.</p></div>
+        </div>
+        <p class="muted" style="margin-top:18px">Para instituições, associações, cooperativas e grupos de saúde que queiram formar seus profissionais empreendedores. Grupos de até 50 participantes, plataforma, materiais e templates INTÉZA, certificação INTÉZA Academy e comunidade de empreendedores da saúde ao final.</p>
+        <div class="btns"><a class="btn" href="#diagnostico">Levar o programa para a minha instituição</a></div>
+
+        <div class="rule" style="margin:40px 0 28px"></div>
+
+        <!-- Cockpit de Execução -->
+        <h3>Cockpit de Execução · formação de empresários</h3>
+        <p style="font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--vinho);margin:10px 0 14px">Trilha de 180 dias · Metodologia em execução · Para empresários e sócios</p>
+        <p class="muted">Sua empresa cresceu. Por que ela ainda precisa de você para funcionar? A formação para empresários que quer a mesma coisa que o Cockpit INTÉZA entrega como projeto: processo com dono, padrão e indicador, e uma empresa que decide com dados. A diferença é que aqui o empresário executa com o método na mão, acompanhado pela INTÉZA, no próprio negócio.</p>
+        <p class="muted" style="margin-top:14px">Um módulo por mês, no mesmo desenho: encontro presencial de 4h e três sessões online de execução acompanhada. Nada fica na aula. Cada módulo termina com uma peça do cockpit da empresa rodando.</p>
+        <div class="list" style="margin-top:22px">
+          <div><span class="t">Mês 1</span><p>Quanto custa a sua empresa depender de você. Mapeamento da operação e cálculo do custo da dependência: horas do dono na rotina, retrabalho, decisões represadas, cliente perdido por demora. Sai com o número em reais e o processo crítico escolhido.</p></div>
+          <div><span class="t">Mês 2</span><p>O processo que sustenta a empresa sem você. O processo crítico mapeado pelas cinco lentes do 5P: propósito, passos, papel, padrão e performance. Dono nomeado e padrão escrito.</p></div>
+          <div><span class="t">Mês 3</span><p>A jornada do cliente como ativo. Descoberta, onboarding, uso e renovação: onde o cliente fica, onde vai embora e o que isso custa. Matriz de priorização por impacto e frequência.</p></div>
+          <div><span class="t">Mês 4</span><p>O cockpit de indicadores. O painel do empresário: o que acontece na empresa, o que isso implica, o que move o ponteiro e onde há oportunidade na mesa. Baseline montado e indicador vivo em cada processo.</p></div>
+          <div><span class="t">Mês 5</span><p>Rituais e governança de execução. Reunião semanal de execução, reunião estratégica mensal, registro de motivos de perda e correção de rota. A empresa passa a se corrigir toda semana, não a cada crise.</p></div>
+          <div><span class="t">Mês 6</span><p>Plano de 90 dias e autonomia. As três prioridades do próximo trimestre, time interno treinado para rodar o cockpit e a escada de maturidade: de reativo a cultural. Processo documentado, empresa decidindo com dados.</p></div>
+        </div>
+        <p class="muted" style="margin-top:18px">Para empresários de todos os setores, em turmas fechadas de uma empresa, de um grupo ou de uma entidade (associações, Sebrae, franquias). Também funciona como preparação ou sustentação de um ciclo de Consulting. Certificação INTÉZA Academy ao final.</p>
+        <div class="btns"><a class="btn" href="#diagnostico">Formar empresários no método Cockpit</a></div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PALESTRAS
+================================================================ -->
+<section class="on-paper" id="palestras" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Palestras</p>
+    <h2 style="max-width:16em;margin-bottom:34px">Quatro temas para o seu evento, convenção ou encontro de liderança.</h2>
+
+    <div class="grid g3" style="margin-bottom:44px">
+      <div class="photo" style="min-height:300px"><span>Foto · Juliana Loch no palco</span></div>
+      <div class="photo" style="min-height:300px"><span>Foto · Mariana Caetano no palco</span></div>
+      <div class="photo" style="min-height:300px"><span>Foto · plateia ou painel (CONAREC, Qualihosp, Wow Summit)</span></div>
+    </div>
+
+    <div class="talk">
+      <p class="q">Experiência é estratégia. Crescimento é valor entregue.</p>
+      <div class="meta">
+        <span>Keynote · 45 a 60 min</span>
+        <span>Para boards, convenções de vendas e encontros de C-level</span>
+        <span>Juliana Loch e Mariana Caetano</span>
+      </div>
+      <p class="muted">Por que as empresas que mais crescem tratam a experiência como decisão estratégica, e como defender esse investimento na linguagem da mesa de decisão. Cases de Amazon, Sírio-Libanês, Volvo e Dasa lidos pelo método de Harvard.</p>
+    </div>
+
+    <div class="talk">
+      <p class="q">Sua empresa cresceu. Por que ela ainda precisa de você para funcionar?</p>
+      <div class="meta">
+        <span>Palestra · 45 min · com dinâmica</span>
+        <span>Para fundadores, sócios e comunidades de empreendedores</span>
+        <span>Mariana Caetano ou Juliana Loch</span>
+      </div>
+      <p class="muted">O custo invisível da dependência do fundador e o método 5P para transformar "apagar incêndio" em processo com dono, padrão e indicador. A plateia calcula o próprio número ao vivo.</p>
+    </div>
+
+    <div class="talk">
+      <p class="q">Reclamação é o sinal do próximo produto.</p>
+      <div class="meta">
+        <span>Palestra · 30 a 45 min</span>
+        <span>Para times de operações, CX, qualidade e produto</span>
+        <span>Juliana Loch ou Mariana Caetano</span>
+      </div>
+      <p class="muted">Do sinal do cliente ao processo, da raiz do defeito à receita. Como transformar reclamação em roadmap e fechar ticket deixa de ser resolver.</p>
+    </div>
+
+    <div class="talk">
+      <p class="q">Acolhimento é estratégia. Cuidado é receita.</p>
+      <div class="meta">
+        <span>Keynote · 30 a 45 min</span>
+        <span>Para hospitais, operadoras, redes de clínicas, diagnóstico e indústria da saúde</span>
+        <span>Mariana Caetano</span>
+      </div>
+      <p class="muted">Estratégia de clientes em saúde, do acolhimento ao resultado. Como a experiência do paciente deixa de ser hotelaria e vira modelo de negócio: o método E=MC², o turnaround de indicadores e o padrão premium levado a toda a operação, em NPS, retenção, HCAHPS e margem.</p>
+    </div>
+
+    <div class="btns">
+      <a class="btn primary" href="#diagnostico">Convidar para o meu evento</a>
+      <a class="btn" href="#">Baixar o one-pager das palestras</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     RESULTADOS / PROVAS
+================================================================ -->
+<section class="on-paper" id="provas">
+  <div class="wrap">
+    <p class="eyebrow">Resultados</p>
+    <h2 style="max-width:16em;margin-bottom:40px">O método já foi testado com quem opera bilhões.</h2>
+
+    <div class="nums">
+      <div><b>82 → 88</b><span class="muted">NPS em turnaround de operação de saúde premium</span></div>
+      <div><b>−20%</b><span class="muted">churn em ciclo de reversão de indicadores críticos</span></div>
+      <div><b>3x</b><span class="muted">receita em operações globais lideradas na América Latina, EUA e Canadá</span></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:48px">
+      <div class="photo" style="min-height:260px"><span>Vídeo-depoimento 1 · nome, cargo, empresa</span></div>
+      <div class="photo" style="min-height:260px"><span>Vídeo-depoimento 2 · nome, cargo, empresa</span></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:48px;align-items:center">
+      <div class="photo" style="min-height:260px;max-width:360px"><span>Capa do livro Experiência do Paciente</span></div>
+      <div>
+        <h3>Coautoria do livro Experiência do Paciente: na teoria e muito mais na prática</h3>
+        <p class="muted" style="margin-top:12px">A INTÉZA apresenta o método E=MC² neste livro que reúne os maiores especialistas do tema no Brasil. Membro da diretoria da SHHE-RJ, CXPA e ICW.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PESQUISAS
+================================================================ -->
+<section class="on-paper" id="pesquisas">
+  <div class="wrap">
+    <p class="eyebrow">Pesquisas INTÉZA · Comportamento de clientes</p>
+    <h2 style="max-width:16em">O que o cliente diz, e o que o cliente faz. Pesquisa própria sobre comportamento de clientes.</h2>
+    <p class="lead" style="margin-top:22px">Estudos originais da INTÉZA sobre como o cliente decide, compra, fica, reclama e indica, em saúde, serviços, SaaS e consumo. A base que alimenta o método, as aulas e as palestras.</p>
+
+    <div class="grid g2" style="margin-top:44px;align-items:start">
+      <div>
+        <h3>Discovery INTÉZA · A lacuna de execução</h3>
+        <p class="muted" style="margin-top:10px">47 gestores e fundadores de PMEs, de R$ 1 mi a R$ 500 mi de faturamento.</p>
+        <div class="nums" style="margin-top:26px">
+          <div><b>81%</b><span class="muted">sabem o que fazer, mas não implementam</span></div>
+          <div><b>74%</b><span class="muted">apontam falta de estrutura e processo como a dor central</span></div>
+          <div><b>89%</b><span class="muted">já tentaram CRM, diagnóstico ou consultoria pontual sem resolver</span></div>
+        </div>
+        <p class="muted" style="margin-top:22px;font-size:.95rem">A lacuna do mercado não é conhecimento. É execução.</p>
+        <div class="btns"><a class="btn champ" href="#diagnostico">Receber o estudo completo</a></div>
+      </div>
+      <div>
+        <div class="photo" style="min-height:220px"><span>Capa · próxima pesquisa INTÉZA (título, ano)</span></div>
+        <p class="muted" style="margin-top:16px;font-size:.95rem">Próximos estudos sobre comportamento de clientes: o que faz o paciente voltar ou trocar de serviço de saúde, por que o cliente reclama e não indica, e a distância entre NPS e recompra nas empresas brasileiras. Deixe seu e-mail no diagnóstico para receber em primeira mão.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     SÓCIAS / TIME
+================================================================ -->
+<section class="wine" id="socias">
+  <div class="wrap">
+    <p class="eyebrow">Quem representa a INTÉZA</p>
+    <h2 style="max-width:16em;margin-bottom:48px">Trajetórias que combinam operação, receita e desenvolvimento de negócios.</h2>
+
+    <div class="grid g3">
+
+      <div>
+        <div class="photo" style="min-height:340px"><span>Foto · Juliana Loch</span></div>
+        <h3 style="margin-top:22px;font-family:var(--display)">Juliana Loch</h3>
+        <p style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--champ);margin:8px 0 16px">Sócia fundadora · Amazon · Volvo · Wellhub</p>
+        <p>Vinte anos em crescimento, lucratividade e experiência do cliente na América Latina, EUA e Canadá. Liderou operações em diversos países, triplicou receitas e escalou equipes em empresas globais como Amazon e Volvo. Membro de conselhos, palestrante e mentora de executivos nas Américas e Europa. Na INTÉZA, é a sócia que conecta crescimento e receita: encontra o dinheiro escondido no que a operação já tem e o transforma em resultado previsível.</p>
+      </div>
+
+      <div>
+        <div class="photo" style="min-height:340px"><span>Foto · Mariana Caetano</span></div>
+        <h3 style="margin-top:22px;font-family:var(--display)">Mariana Caetano</h3>
+        <p style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--champ);margin:8px 0 16px">Sócia fundadora · Sírio-Libanês · Dasa · Unimed</p>
+        <p>Estruturou operações de alta complexidade em toda a cadeia da saúde: Sírio-Libanês, Dasa, Unimed e indústria global, sob padrão auditado por certificações internacionais. Coautora do livro Experiência do Paciente, com especializações em Experiência do Cliente (Stanford) e metodologia de Harvard Business School. Na INTÉZA, é a sócia que transforma a experiência em estratégia, modelo e processo sustentável, replicável e escalável.</p>
+      </div>
+
+      <div>
+        <div class="photo" style="min-height:340px"><span>Foto · Alfredo Hirsch</span></div>
+        <h3 style="margin-top:22px;font-family:var(--display)">Alfredo Hirsch</h3>
+        <p style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--champ);margin:8px 0 16px">Consultor · Business Development · Coca-Cola</p>
+        <p>Trinta anos construindo crescimento de mercado em bens de consumo. Na Coca-Cola, VP de categorias e dos programas comerciais da Copa do Mundo e dos Jogos Olímpicos, com turnarounds que multiplicaram margem e EBITDA. Na INTÉZA, é quem leva o modelo ao mercado: parcerias estratégicas, go-to-market, novas frentes de receita e liderança de projetos de eficiência operacional.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     FAQ — accordion com animação JS
+================================================================ -->
+<section class="on-paper" id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Antes de falar com a gente</p>
+    <h2 style="margin-bottom:30px">Dúvidas frequentes</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="true">
+          Por onde começo: Consulting, Advisory ou Academy?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-body open">
+          <p>Pelo diagnóstico de 20 minutos. Nele definimos o problema prioritário, o impacto e a porta de entrada que faz sentido para o seu momento. Nenhuma proposta sai sem essa conversa.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          A INTÉZA atende empresas de que porte?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-body">
+          <p>Empresas de pequeno, médio e grande porte que querem transformar estratégia em execução. O Cockpit exige maturidade e faturamento mínimo para que o investimento não pese; isso é validado no diagnóstico.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          Vocês atuam fora de São Paulo?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-body">
+          <p>Sim. Os programas da Academy são online ao vivo ou presenciais, conforme a empresa. Consulting e Advisory combinam presença na operação com rituais remotos.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          O programa tem vínculo com Harvard?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-body">
+          <p>Não. A base metodológica é o programa Transforming Customer Experiences, da HBS Executive Education, cursado por Juliana Loch e Mariana Caetano. A certificação é INTÉZA Academy.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     DIAGNÓSTICO — formulário principal
+================================================================ -->
+<section class="on-paper" id="diagnostico">
+  <div class="wrap grid g2" style="align-items:start">
+
+    <div>
+      <p class="eyebrow">Diagnóstico</p>
+      <h2>20 minutos para saber por onde a sua empresa perde valor.</h2>
+      <p class="lead" style="margin-top:24px">Sem pitch. Você sai com o problema prioritário nomeado e o próximo passo, com ou sem a INTÉZA.</p>
+
+      <div class="contact-grid">
+        <b>WhatsApp</b>
+        <span>+55 11 98881-1647</span>
+        <b>E-mail</b>
+        <span>contato@inteza.com.br</span>
+        <b>Instagram</b>
+        <span>@in.teza</span>
+      </div>
+    </div>
+
+    <form id="diag-form" novalidate>
+      <div class="form-grid">
+
+        <div class="field" id="field-nome">
+          <label for="nome">Nome</label>
+          <input id="nome" name="nome" type="text" required autocomplete="name">
+          <span class="field-error">Campo obrigatório</span>
+        </div>
+
+        <div class="field" id="field-empresa">
+          <label for="empresa">Empresa e cargo</label>
+          <input id="empresa" name="empresa" type="text" required autocomplete="organization">
+          <span class="field-error">Campo obrigatório</span>
+        </div>
+
+        <div class="field" id="field-email">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+          <span class="field-error">Informe um e-mail válido</span>
+        </div>
+
+        <div class="field">
+          <label for="fat">Faturamento anual</label>
+          <select id="fat" name="faturamento">
+            <option value="">Selecione…</option>
+            <option>Até R$ 8 milhões</option>
+            <option>R$ 8 a 30 milhões</option>
+            <option>R$ 30 a 100 milhões</option>
+            <option>Acima de R$ 100 milhões</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="interesse">Interesse</label>
+          <select id="interesse" name="interesse">
+            <option value="">Selecione…</option>
+            <option>Consulting · Cockpit</option>
+            <option>Consulting · Experiência do Paciente</option>
+            <option>Advisory</option>
+            <option>Academy · in company</option>
+            <option>Academy · Do Clínico ao Empresário</option>
+            <option>Academy · Cockpit de Execução · formação de empresários</option>
+            <option>Palestra</option>
+          </select>
+        </div>
+
+        <div class="field" id="field-msg">
+          <label for="msg">O que a sua empresa precisa resolver</label>
+          <textarea id="msg" name="mensagem" rows="3"></textarea>
+        </div>
+
+        <div>
+          <button class="btn champ" type="submit">Agendar diagnóstico</button>
+          <p class="form-success" id="form-success">Recebemos. Respondemos em até um dia útil.</p>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     RODAPÉ
+================================================================ -->
+<footer class="on-paper">
+  <div class="wrap">
+    <a class="logo" href="#top">INT<em>É</em>ZA<small>CUSTOMER GROWTH</small></a>
+    <span class="muted">Advisory · Business School · Consulting</span>
+    <span class="muted">@in.teza · inteza.com.br · contato@inteza.com.br · São Paulo, BR</span>
+  </div>
+</footer>
+
+
+<!-- ================================================================
+     JAVASCRIPT
+================================================================ -->
+<script>
+  /* ------------------------------------------------------------------
+     1. Nav — sombra ao fazer scroll
+  ------------------------------------------------------------------ */
+  (function () {
+    var nav = document.getElementById('nav');
+    var lastY = 0;
+
+    function onScroll() {
+      var y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 10);
+      lastY = y;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+
+  /* ------------------------------------------------------------------
+     2. Hambúrguer — abre/fecha drawer mobile
+  ------------------------------------------------------------------ */
+  (function () {
+    var btn   = document.getElementById('hamburger');
+    var drawer = document.getElementById('mobile-nav');
+    var body   = document.body;
+
+    function toggleMenu(open) {
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      drawer.setAttribute('aria-hidden', String(!open));
+      drawer.classList.toggle('open', open);
+      body.style.overflow = open ? 'hidden' : '';
+    }
+
+    btn.addEventListener('click', function () {
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      toggleMenu(!isOpen);
+    });
+
+    // Fecha ao clicar num link do drawer
+    drawer.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () { toggleMenu(false); });
+    });
+
+    // Fecha ao redimensionar para desktop
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860) toggleMenu(false);
+    });
+  })();
+
+
+  /* ------------------------------------------------------------------
+     3. FAQ — accordion com animação max-height
+  ------------------------------------------------------------------ */
+  (function () {
+    var items = document.querySelectorAll('.faq-item');
+
+    items.forEach(function (item) {
+      var btn  = item.querySelector('.faq-btn');
+      var body = item.querySelector('.faq-body');
+
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+
+        // Fecha todos
+        items.forEach(function (other) {
+          var ob = other.querySelector('.faq-btn');
+          var oy = other.querySelector('.faq-body');
+          ob.setAttribute('aria-expanded', 'false');
+          oy.classList.remove('open');
+        });
+
+        // Abre ou mantém fechado
+        if (!expanded) {
+          btn.setAttribute('aria-expanded', 'true');
+          body.classList.add('open');
+        }
+      });
+    });
+  })();
+
+
+  /* ------------------------------------------------------------------
+     4. Formulário — validação básica
+  ------------------------------------------------------------------ */
+  (function () {
+    var form    = document.getElementById('diag-form');
+    var success = document.getElementById('form-success');
+
+    var rules = [
+      { id: 'nome',    validate: function (v) { return v.trim().length > 0; },     msg: 'Campo obrigatório' },
+      { id: 'empresa', validate: function (v) { return v.trim().length > 0; },     msg: 'Campo obrigatório' },
+      { id: 'email',   validate: function (v) { return /\S+@\S+\.\S+/.test(v); }, msg: 'Informe um e-mail válido' }
+    ];
+
+    function clearErrors() {
+      rules.forEach(function (r) {
+        var field = document.getElementById('field-' + r.id);
+        if (field) {
+          field.classList.remove('has-error');
+          var input = document.getElementById(r.id);
+          if (input) input.classList.remove('error');
+          var errEl = field.querySelector('.field-error');
+          if (errEl) errEl.textContent = r.msg;
+        }
+      });
+    }
+
+    // Limpa erro ao digitar
+    rules.forEach(function (r) {
+      var input = document.getElementById(r.id);
+      if (input) {
+        input.addEventListener('input', function () {
+          if (r.validate(input.value)) {
+            var field = document.getElementById('field-' + r.id);
+            if (field) {
+              field.classList.remove('has-error');
+              input.classList.remove('error');
+            }
+          }
+        });
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearErrors();
+
+      var valid = true;
+
+      rules.forEach(function (r) {
+        var input = document.getElementById(r.id);
+        if (!input) return;
+        if (!r.validate(input.value)) {
+          var field = document.getElementById('field-' + r.id);
+          if (field) {
+            field.classList.add('has-error');
+            input.classList.add('error');
+          }
+          if (valid) { input.focus(); }
+          valid = false;
+        }
+      });
+
+      if (valid) {
+        // Submit success (sem backend — substitua pelo endpoint real)
+        success.style.display = 'block';
+        form.querySelectorAll('input, select, textarea, button[type="submit"]').forEach(function (el) {
+          el.setAttribute('disabled', 'disabled');
+        });
+        // Scroll suave para a mensagem de sucesso
+        success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
